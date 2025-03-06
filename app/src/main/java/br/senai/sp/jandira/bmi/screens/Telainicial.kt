@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowForward
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -21,6 +24,9 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.currentCompositionLocalContext
+import androidx.compose.runtime.mutableStateMapOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -28,6 +34,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardCapitalization
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -35,6 +43,10 @@ import br.senai.sp.jandira.bmi.R
 
 @Composable
 fun TelaInicial(modifier: Modifier = Modifier) {
+
+    var nomeState = remember {
+        mutableStateOf(value = "")
+    }
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -78,7 +90,7 @@ fun TelaInicial(modifier: Modifier = Modifier) {
             ) {
                 Column(
                     verticalArrangement = Arrangement.SpaceBetween,
-                    horizontalAlignment = Alignment.End,
+                    horizontalAlignment = Alignment.End ,
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(32.dp)
@@ -91,17 +103,29 @@ fun TelaInicial(modifier: Modifier = Modifier) {
                           fontWeight = FontWeight.Bold
                       )
                       OutlinedTextField(
-                          value = "",
-                          onValueChange = {},
+                          value = nomeState.value,
+                          onValueChange = {nome ->
+                              nomeState.value = nome
+                          },
                           modifier = Modifier
                               .fillMaxWidth()
                               .padding(top = 8.dp),
                           shape = RoundedCornerShape(10.dp),
-                          label = {
-                              Text(text = "Name")
-                          }
+                          label ={ Text(text = stringResource(R.string.your_name_here))},
+                          leadingIcon = {
+                              Icon(
+                                  imageVector = Icons.Default.AccountBox,
+                                  contentDescription = "",
+                                  tint = Color.Blue
+                              )
+                          },
+                          keyboardOptions = KeyboardOptions(
+                              keyboardType = KeyboardType.Text,
+                              capitalization = KeyboardCapitalization.Sentences
+                          )
                       )
                   }
+
                     Button(onClick = {},
                             modifier = Modifier
                     ){
