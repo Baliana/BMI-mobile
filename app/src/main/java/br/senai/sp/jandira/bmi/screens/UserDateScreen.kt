@@ -1,5 +1,6 @@
 package br.senai.sp.jandira.bmi.screens
 
+import android.content.Context
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -34,6 +35,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -61,6 +63,16 @@ fun UserDataScreen(navController: NavController?) {
         mutableStateOf("")
     }
 
+    //Abrir o arquivi usuario.xml para recuperar o nome que o ususario digitou na tela anterior
+    var context = LocalContext.current
+    var sharedUserFile = context
+        .getSharedPreferences(
+            "usuario",  Context.MODE_PRIVATE
+        )
+    var userName = sharedUserFile.getString(
+        "user_name", "name not found"
+    )
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -81,8 +93,8 @@ fun UserDataScreen(navController: NavController?) {
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = stringResource(R.string.hi),
-                fontSize = 32.sp,
+                text = stringResource(R.string.hi) + " $userName! ",
+                fontSize = 30.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
                 modifier = Modifier
@@ -185,7 +197,7 @@ fun UserDataScreen(navController: NavController?) {
                                 .padding(horizontal = 12.dp,
                                     vertical = 8.dp),
                             colors = ButtonDefaults.buttonColors(
-                                containerColor = Color(0xFF0390E1)
+                                containerColor = Color(0xFFB103C5)
                             )
                         ) {
                             Text(
@@ -305,7 +317,13 @@ fun UserDataScreen(navController: NavController?) {
                     )
                 }
                 Button(
-                    onClick = {navController?.navigate("BMIResultScreen")},
+                    onClick = {
+                        val editor = sharedUserFile.edit()
+                        editor.putInt("user_age",ageState.value.trim().toInt())
+                        editor.putInt("user_weight",weightState.value.trim().toInt())
+                        editor.putInt("user_height",heightState.value.trim().toInt())
+                        editor.apply()
+                        navController?.navigate("BMIResultScreen")},
                     modifier = Modifier
                         .padding(horizontal = 16.dp)
                         .fillMaxWidth(),
