@@ -19,8 +19,18 @@
     <string name="Result.weight"> 97 Kg</string>
     <string name="Result.height"> 178 cm Kg</string>
     <string name="New_Calc"> New Calc</string>
-
-
+    <string name="under_weight"> You are below your ideal weight</string>
+    <string name="normal_weight"> You are normal your body weight</string>
+    <string name="over_weight"> You are slightly your overweight</string>
+    <string name="class1_weight"> You have Class I Obesity</string>
+    <string name="class2_weight"> You have Class II Obesity</string>
+    <string name="class3_weight"> You have Class III Obesity</string>
+    <string name="Under_weight_table"> Underweight</string>
+    <string name="normal_weight_table"> Normal</string>
+    <string name="over_weight_table"> Overweight</string>
+    <string name="obesity1"> Obesity class I</string>
+    <string name="obesity2"> Obesity class II</string>
+    <string name="obesity3"> Obesity class III</string>
 
 
 
