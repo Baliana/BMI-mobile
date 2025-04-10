@@ -9,7 +9,7 @@ import kotlin.math.pow
 
 @Composable
 fun bmiCalculator(weight: Int, height: Double): Bmi{
-    //calcula o imc
+    //calcular o imc
     val bmi = weight / height.div(100).pow(2)
 
      when{
