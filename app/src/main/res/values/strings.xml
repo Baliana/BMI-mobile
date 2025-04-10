@@ -32,6 +32,10 @@
     <string name="obesity2"> Obesity class II</string>
     <string name="obesity3"> Obesity class III</string>
 
+    <string name="error_Age">The Age is required</string>
+    <string name="error_Weight">The Weight is required</string>
+    <string name="error_Height">The Height is required</string>
+
 
 
 </resources>

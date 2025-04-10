@@ -63,6 +63,9 @@ fun UserDataScreen(navController: NavController?) {
         mutableStateOf("")
     }
 
+    var isAgeError = remember {
+        mutableStateOf(false)
+    }
     //Abrir o arquivi usuario.xml para recuperar o nome que o ususario digitou na tela anterior
     var context = LocalContext.current
     var sharedUserFile = context
@@ -154,8 +157,10 @@ fun UserDataScreen(navController: NavController?) {
                             onClick = {},
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 12.dp,
-                                    vertical = 8.dp),
+                                .padding(
+                                    horizontal = 12.dp,
+                                    vertical = 8.dp
+                                ),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFF0390E1)
                             )
@@ -194,8 +199,10 @@ fun UserDataScreen(navController: NavController?) {
                             onClick = {},
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(horizontal = 12.dp,
-                                    vertical = 8.dp),
+                                .padding(
+                                    horizontal = 12.dp,
+                                    vertical = 8.dp
+                                ),
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFFB103C5)
                             )
@@ -210,7 +217,8 @@ fun UserDataScreen(navController: NavController?) {
                 Column (
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 16.dp,
+                        .padding(
+                            horizontal = 16.dp,
                             vertical = 16.dp
                         )
                 )
@@ -246,7 +254,14 @@ fun UserDataScreen(navController: NavController?) {
                         ),
                         textStyle = TextStyle(
                             fontSize = 20.sp
-                        )
+                        ),
+                        isError = isAgeError.value,
+                        supportingText = {
+                            Text(
+                                text = .value,
+                                color = Color.Red
+                            )
+                        }
                     )
                     OutlinedTextField(
                         value = weightState.value,
@@ -278,9 +293,7 @@ fun UserDataScreen(navController: NavController?) {
                             cursorColor = Color(color = 0xFF4A97C4),
                             unfocusedBorderColor = Color(0xFF144B70)
                         ),
-                        textStyle = TextStyle(
-                            fontSize = 20.sp
-                        )
+
                     )
                     OutlinedTextField(
                         value = heightState.value,
@@ -313,7 +326,9 @@ fun UserDataScreen(navController: NavController?) {
                         ),
                         textStyle = TextStyle(
                             fontSize = 20.sp
-                        )
+                        ),
+
+
                     )
                 }
                 Button(
